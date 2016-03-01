@@ -1,0 +1,66 @@
+<!DOCTYPE>  
+<HTML>  
+ <HEAD>  
+  <TITLE> Get Multiple Combine </TITLE>  
+ </HEAD>  
+  
+ <BODY>  
+ <input type="button" id="go" onclick="getnext('',array)" value="GO"/>
+ <textarea id="show"></textarea> 
+
+
+  <script>  
+    //Define your array
+    var a = new Array('A1','A2','A3');  
+    var b = new Array('B1','B2','B3');  
+    var c = new Array('C1','C2');  
+    var d = new Array('D1','D2','D3','D4');  
+    var array = new Array(4);  
+    array[0]=a;  
+    array[1]=b;  
+    array[2]=c;  
+    array[3]=d;  
+    //getnext(res,array) 
+
+    //Recursion      
+    function getnext(str,arr){  
+        //Get first sub array
+        var subA = arr[0];  
+        //Drop first sub array from arr as newArr
+        var newArr = copyArray(arr);  
+        //Loop firt sub array
+        for(var n=0;n<subA.length;n++){  
+            //if newArr is not undefined
+            if(newArr){  
+                //1)prefix the existing str
+                //2)prefix add index=n first array element
+                //3)do recursion
+                getnext(str+","+subA[n], newArr);                 
+            }  
+            //otherwise newArr is undefined
+            //means we exit here!
+            else{  
+            //  alert(str+subA[n]);
+            //console output  
+                console.log(str+subA[n]);
+            //set each line to textarea
+                document.getElementById("show").value += str+","+subA[n]+"\n";
+            }  
+        }  
+    }  
+    
+    //remove first sub array from the size N array
+    //return the 1->(N-1) sub array as new array
+    //undefined if N==1
+    function copyArray(arr){  
+        if(arr.length>1){  
+            var b = new Array(arr.length-1);  
+            for(var i=1;i<arr.length;i++){  
+                b[i-1] = arr[i];  
+            }  
+            return b;  
+        }  
+    }  
+  </script>  
+ </BODY>  
+</HTML>  
